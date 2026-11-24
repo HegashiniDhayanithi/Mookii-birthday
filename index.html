@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mookii's Birthday Countdown 🎀</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Trebuchet MS', sans-serif;
+    background: linear-gradient(
+        135deg,
+        #ffe4ef,
+        #fff7fa,
+        #ffc6dc,
+        #fff0f5
+    );
+    color: #bd527d;
+}
+
+.container {
+    position: relative;
+    width: 90%;
+    max-width: 440px;
+    padding: 30px 18px;
+    text-align: center;
+    background: rgba(255,255,255,0.85);
+    border: 2px solid white;
+    border-radius: 30px;
+    box-shadow: 0 10px 40px #e99abf88;
+    z-index: 2;
+    animation: appear 1.2s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.top-heart {
+    font-size: 45px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+h1 {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    color: #df6599;
+    margin: 12px 0;
+    text-shadow: 2px 2px 8px #ffc5dc;
+}
+
+.name {
+    font-family: Georgia, serif;
+    font-size: 35px;
+    color: #d84f8c;
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+.subtitle {
+    color: #a95b7e;
+    font-size: 15px;
+    margin: 12px 0 25px;
+    line-height: 1.6;
+}
+
+.cake {
+    font-size: 65px;
+    margin: 10px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+    margin-top: 20px;
+}
+
+.time-box {
+    background: linear-gradient(
+        145deg,
+        #ffe0ed,
+        #fff7fa
+    );
+    border: 1px solid #f5a8c8;
+    border-radius: 15px;
+    padding: 14px 3px;
+    box-shadow: 0 4px 10px #e9a0bf55;
+}
+
+.time-box span {
+    display: block;
+    font-size: 27px;
+    font-weight: bold;
+    color: #d94d89;
+}
+
+.time-box small {
+    font-size: 10px;
+    color: #a75a7b;
+    letter-spacing: 1px;
+}
+
+.love-message {
+    margin-top: 25px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #c25d8b;
+}
+
+.footer {
+    margin-top: 22px;
+    font-size: 13px;
+    color: #d77da3;
+}
+
+.floating {
+    position: fixed;
+    bottom: -40px;
+    font-size: 24px;
+    pointer-events: none;
+    animation: floatUp linear infinite;
+    z-index: 1;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: 1; }
+    100% {
+        transform: translateY(-115vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+#birthdayMessage {
+    display: none;
+    animation: appear 1s ease;
+}
+
+#birthdayMessage h2 {
+    color: #df4f8d;
+    font-size: 30px;
+    margin: 15px 0;
+}
+
+#birthdayMessage p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #b54d7d;
+}
+
+button {
+    border: none;
+    border-radius: 25px;
+    padding: 13px 25px;
+    background: #ed8db4;
+    color: white;
+    font-size: 15px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px #e9a0bf77;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top-heart">💗</div>
+
+    <h1>Someone Special's Day</h1>
+
+    <div class="name">Mookii 🫂🫳</div>
+
+    <p class="subtitle">
+        A little countdown for a very special day...<br>
+        Get ready for love, happiness and surprises! 🎀
+    </p>
+
+    <div class="cake">🎂</div>
+
+    <h3>Time Until Your Birthday 💕</h3>
+
+    <div class="countdown" id="countdown">
+
+        <div class="time-box">
+            <span id="days">00</span>
+            <small>DAYS</small>
+        </div>
+
+        <div class="time-box">
+            <span id="hours">00</span>
+            <small>HOURS</small>
+        </div>
+
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <small>MINS</small>
+        </div>
+
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <small>SECS</small>
+        </div>
+
+    </div>
+
+    <div class="love-message">
+        Every second brings us closer<br>
+        to your beautiful day! 💞
+    </div>
+
+    <div id="birthdayMessage">
+
+        <h2>🎉 HAPPY BIRTHDAY! 🎉</h2>
+
+        <div class="cake">🎂</div>
+
+        <p>
+            Happiest Birthday, Mookii! 💗<br><br>
+            May your day be filled with endless
+            smiles, beautiful memories,
+            laughter and happiness.<br><br>
+            Keep shining and keep being
+            your wonderful self! 🌷
+        </p>
+
+        <div style="font-size:35px;margin-top:15px">
+            💗 🎀 🧸 🌸
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Made with lots of love & sparkles ✨
+    </div>
+
+</div>
+
+<script>
+
+// Birthday: 26 November 2026
+// Indian Standard Time: 12:00 AM
+
+const birthdayDate = new Date(
+    "2026-11-26T00:00:00+05:30"
+).getTime();
+
+function updateCountdown() {
+
+    const now = Date.now();
+
+    const distance = birthdayDate - now;
+
+    if (distance <= 0) {
+
+        document.getElementById("countdown").style.display = "none";
+
+        document.querySelector(".love-message").style.display = "none";
+
+        document.getElementById("birthdayMessage").style.display = "block";
+
+        return;
+    }
+
+    const days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+        (distance / (1000 * 60 * 60)) % 24
+    );
+
+    const minutes = Math.floor(
+        (distance / (1000 * 60)) % 60
+    );
+
+    const seconds = Math.floor(
+        (distance / 1000) % 60
+    );
+
+    document.getElementById("days").innerText = days;
+
+    document.getElementById("hours").innerText =
+        String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").innerText =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").innerText =
+        String(seconds).padStart(2, "0");
+}
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+
+// Floating hearts and flowers
+
+const decorations = ["💗", "💕", "🌸", "✨", "🎀", "💖"];
+
+function createFloating() {
+
+    const item = document.createElement("div");
+
+    item.className = "floating";
+
+    item.innerHTML =
+        decorations[Math.floor(Math.random() * decorations.length)];
+
+    item.style.left = Math.random() * 100 + "vw";
+
+    item.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+    item.style.fontSize =
+        (16 + Math.random() * 20) + "px";
+
+    document.body.appendChild(item);
+
+    setTimeout(() => {
+        item.remove();
+    }, 10000);
+}
+
+setInterval(createFloating, 500);
+
+</script>
+
+</body>
+</html>
